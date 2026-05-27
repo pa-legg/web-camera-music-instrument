@@ -303,15 +303,15 @@ body {
 
 .key {
   flex: 1;
-  max-width: 72px;
+  max-width: 56px;
   aspect-ratio: 1;
-  border-radius: 14px;
+  border-radius: 12px;
   background: var(--key-color);
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 800;
-  font-size: 1.1rem;
+  font-size: 0.95rem;
   color: rgba(0, 0, 0, 0.55);
   transition: transform 0.1s, box-shadow 0.1s;
   box-shadow: 0 4px 0 rgba(0, 0, 0, 0.2);
@@ -341,7 +341,7 @@ body {
   }
 
   .key {
-    max-width: 88px;
-    font-size: 1.3rem;
+    max-width: 72px;
+    font-size: 1.15rem;
   }
 }

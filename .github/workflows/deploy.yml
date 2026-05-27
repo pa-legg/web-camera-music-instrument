@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Deploy WaveTunes
 
 on:
   push:
@@ -7,36 +7,18 @@ on:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: pages
-  cancel-in-progress: true
 
 jobs:
-  build:
+  trigger-site-deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: npm
-      - run: npm ci
-      - run: npm run build
+      - name: Trigger deploy on pa-legg.github.io
         env:
-          VITE_BASE_PATH: /web-camera-music-instrument/
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: dist
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - uses: actions/deploy-pages@v4
-        id: deployment
+          GH_TOKEN: ${{ secrets.SITE_REPO_TOKEN }}
+        run: |
+          if [ -z "$GH_TOKEN" ]; then
+            echo "SITE_REPO_TOKEN secret is not set. Deploy manually with:"
+            echo "  gh workflow run deploy-wavetunes.yml --repo pa-legg/pa-legg.github.io"
+            exit 1
+          fi
+          gh workflow run deploy-wavetunes.yml --repo pa-legg/pa-legg.github.io

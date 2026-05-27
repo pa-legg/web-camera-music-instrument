@@ -10,10 +10,10 @@ WaveTunes uses **AI hand tracking** (MediaPipe) to watch your hand through the w
 
 | Mode | How to play |
 |------|-------------|
-| **Magic Zones** | Move your hand up and down to select a colored zone. Pinch 👌 or open your palm 🖐️ to play that note. |
-| **Finger Count** | Hold up 1–6 fingers to play different notes — 1 finger = red, 2 = orange, and so on. |
+| **Magic Zones** | Move your hand up and down to select a colored zone. Open your palm 🖐️ to play — a fist ✊ stays silent. |
+| **Finger Count** | Hold up 1–8 fingers to play different notes — 1 finger = red, 2 = orange, and so on. |
 
-Notes use a **pentatonic scale** (C, D, E, G, A, C) so every combination sounds pleasant — perfect for kids exploring music.
+Notes use the full **C major scale** (C, D, E, F, G, A, B, C).
 
 ## Getting started
 
@@ -31,6 +31,18 @@ Open the URL shown in your terminal (usually `http://localhost:5173`). Click **S
 ```bash
 npm run build
 npm run preview
+```
+
+## Deployment
+
+The live app is hosted on [pa-legg.github.io](https://pa-legg.github.io) at:
+
+**https://pa-legg.github.io/resources/web-camera-musical-instrument/**
+
+To redeploy after changes, run the workflow on the site repository:
+
+```bash
+gh workflow run deploy-wavetunes.yml --repo pa-legg/pa-legg.github.io
 ```
 
 ## Tech stack

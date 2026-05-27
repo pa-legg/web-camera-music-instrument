@@ -26,12 +26,12 @@ export function mapHandToNote(hand: HandState, mode: PlayMode): PlayEvent {
     return { noteIndex: index, triggered: true, zoneIndex: index }
   }
 
-  // Zone mode: vertical position selects note; pinch or open palm triggers
+  // Zone mode: vertical position selects note; only an open palm plays
   const zoneIndex = Math.min(
     zoneCount - 1,
     Math.max(0, Math.floor(hand.fingerTipY * zoneCount)),
   )
-  const triggered = hand.isPinching || hand.isOpenPalm || hand.fingerCount >= 2
+  const triggered = hand.isOpenPalm
 
   return {
     noteIndex: zoneIndex,

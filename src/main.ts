@@ -79,7 +79,7 @@ function loop(timestamp: number): void {
   const activeIndex = hand.detected ? event.zoneIndex : -1
   const isPlaying = event.triggered && event.noteIndex >= 0
 
-  highlightZone(activeIndex, hand.detected)
+  highlightZone(activeIndex, hand.detected, isPlaying)
   drawOverlay(overlay(), hand, activeIndex)
 
   if (isPlaying) {

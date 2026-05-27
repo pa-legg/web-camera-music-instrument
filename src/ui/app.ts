@@ -64,7 +64,7 @@ export function buildApp(): HTMLElement {
           </button>
         </div>
         <p class="instructions" id="instructions">
-          Move your hand up &amp; down to pick a color. Pinch or show your palm to play!
+          Move your hand up &amp; down to pick a color. Open your palm 🖐️ to play — a fist ✊ stays silent!
         </p>
       </div>
 
@@ -106,19 +106,23 @@ export function setMode(mode: PlayMode, instructionsEl: HTMLElement): void {
 
   if (mode === 'zones') {
     instructionsEl.textContent =
-      'Move your hand up & down to pick a color. Pinch 👌 or open your palm 🖐️ to play!'
+      'Move your hand up & down to pick a color. Open your palm 🖐️ to play — a fist ✊ stays silent!'
   } else {
     instructionsEl.textContent =
-      'Hold up fingers to play! 1 finger = red, 2 = orange, 3 = yellow… up to 6 notes!'
+      'Hold up fingers to play! 1 finger = red, 2 = orange, 3 = yellow… up to 8 notes!'
   }
 }
 
-export function highlightZone(zoneIndex: number, active: boolean): void {
+export function highlightZone(
+  zoneIndex: number,
+  handDetected: boolean,
+  playing: boolean,
+): void {
   document.querySelectorAll('.zone').forEach((el, i) => {
-    el.classList.toggle('active', i === zoneIndex && active)
+    el.classList.toggle('active', i === zoneIndex && handDetected)
   })
   document.querySelectorAll('.key').forEach((el, i) => {
-    el.classList.toggle('playing', i === zoneIndex && active)
+    el.classList.toggle('playing', i === zoneIndex && playing)
   })
 }
 

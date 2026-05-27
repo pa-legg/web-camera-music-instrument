@@ -1,10 +1,19 @@
 import * as Tone from 'tone'
 
-/** Pentatonic scale — every note sounds good together for kids */
-export const NOTES = ['C4', 'D4', 'E4', 'G4', 'A4', 'C5'] as const
+/** C major scale — C through B plus high C */
+export const NOTES = ['C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4', 'C5'] as const
 export type NoteName = (typeof NOTES)[number]
 
-const NOTE_COLORS = ['#ff6b6b', '#ffa94d', '#ffd43b', '#69db7c', '#4dabf7', '#da77f2']
+const NOTE_COLORS = [
+  '#ff6b6b',
+  '#ffa94d',
+  '#ffd43b',
+  '#a9e34b',
+  '#69db7c',
+  '#4dabf7',
+  '#9775fa',
+  '#da77f2',
+]
 
 export function getNoteColor(index: number): string {
   return NOTE_COLORS[index % NOTE_COLORS.length]
