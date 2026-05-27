@@ -291,6 +291,70 @@ body {
   color: var(--text-muted);
   line-height: 1.5;
   padding: 0 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+/* ── Note duration picker ── */
+.duration-picker {
+  margin-top: 0.25rem;
+}
+
+.duration-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem;
+  margin-top: 0.35rem;
+}
+
+.duration-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  color: var(--text);
+  border-radius: 16px;
+  padding: 0.65rem 0.5rem;
+  font-family: var(--font);
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, transform 0.1s;
+}
+
+.duration-btn.active {
+  background: rgba(108, 92, 231, 0.35);
+  border-color: var(--accent-light);
+  box-shadow: 0 0 16px rgba(108, 92, 231, 0.35);
+}
+
+.duration-btn:active {
+  transform: scale(0.97);
+}
+
+.duration-symbol {
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+.duration-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.duration-beats {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.duration-key {
+  margin-top: 0.15rem;
+  font-size: 0.7rem;
+  font-family: var(--font);
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  padding: 0.1rem 0.45rem;
+  color: var(--text-muted);
 }
 
 /* ── On-screen keyboard ── */
@@ -343,5 +407,9 @@ body {
   .key {
     max-width: 72px;
     font-size: 1.15rem;
+  }
+
+  .duration-options {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }

@@ -1,16 +1,18 @@
 import './style.css'
-import { AudioEngine } from './audio/engine'
+import { AudioEngine, NOTE_DURATIONS, type NoteDurationId } from './audio/engine'
 import { mapHandToNote, type PlayMode } from './gesture/noteMapper'
 import { HandTracker, parseHandResult } from './vision/handTracker'
 import { getNoteColor } from './audio/engine'
 import {
   addSparkle,
   buildApp,
+  buildDurationPicker,
   buildKeyboard,
   buildZones,
   createSparkle,
   drawOverlay,
   highlightZone,
+  setDurationSelection,
   setMode,
   setStartLoading,
   showGame,
@@ -36,6 +38,27 @@ const instructionsEl = () => document.getElementById('instructions') as HTMLElem
 
 buildZones(zonesEl())
 buildKeyboard(keyboardEl())
+
+function selectDuration(id: NoteDurationId): void {
+  audio.setDuration(id)
+  setDurationSelection(id)
+}
+
+buildDurationPicker(
+  document.getElementById('duration-options')!,
+  audio.getDurationId(),
+  selectDuration,
+)
+
+const DURATION_BY_KEY = Object.fromEntries(
+  NOTE_DURATIONS.map((d) => [d.hotkey, d.id]),
+) as Record<string, NoteDurationId>
+
+window.addEventListener('keydown', (event) => {
+  if (event.repeat) return
+  const id = DURATION_BY_KEY[event.key.toLowerCase()]
+  if (id) selectDuration(id)
+})
 
 document.querySelectorAll('.mode-btn').forEach((btn) => {
   btn.addEventListener('click', () => {

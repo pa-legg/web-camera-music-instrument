@@ -1,4 +1,4 @@
-import { getNoteColor, NOTES } from '../audio/engine'
+import { getNoteColor, NOTE_DURATIONS, NOTES, type NoteDurationId } from '../audio/engine'
 import type { PlayMode } from '../gesture/noteMapper'
 import type { HandState } from '../vision/handTracker'
 
@@ -66,6 +66,11 @@ export function buildApp(): HTMLElement {
         <p class="instructions" id="instructions">
           Move your hand up &amp; down to pick a color. Open your palm 🖐️ to play — a fist ✊ stays silent!
         </p>
+
+        <div class="duration-picker">
+          <span class="mode-label">Note length:</span>
+          <div class="duration-options" id="duration-options"></div>
+        </div>
       </div>
 
       <div class="keyboard" id="keyboard"></div>
@@ -96,6 +101,38 @@ export function buildKeyboard(container: HTMLElement): void {
     key.style.setProperty('--key-color', getNoteColor(i))
     key.innerHTML = `<span class="key-note">${note.replace(/\d/, '')}</span>`
     container.appendChild(key)
+  })
+}
+
+export function buildDurationPicker(
+  container: HTMLElement,
+  selectedId: NoteDurationId,
+  onSelect: (id: NoteDurationId) => void,
+): void {
+  container.innerHTML = ''
+  NOTE_DURATIONS.forEach((duration) => {
+    const btn = document.createElement('button')
+    btn.type = 'button'
+    btn.className = 'duration-btn'
+    btn.dataset.duration = duration.id
+    btn.classList.toggle('active', duration.id === selectedId)
+    btn.innerHTML = `
+      <span class="duration-symbol">${duration.symbol}</span>
+      <span class="duration-label">${duration.label}</span>
+      <span class="duration-beats">${duration.beats} beat${duration.beats === 1 ? '' : 's'}</span>
+      <kbd class="duration-key">${duration.hotkey.toUpperCase()}</kbd>
+    `
+    btn.addEventListener('click', () => onSelect(duration.id))
+    container.appendChild(btn)
+  })
+}
+
+export function setDurationSelection(id: NoteDurationId): void {
+  document.querySelectorAll('.duration-btn').forEach((btn) => {
+    btn.classList.toggle(
+      'active',
+      btn.getAttribute('data-duration') === id,
+    )
   })
 }
 
